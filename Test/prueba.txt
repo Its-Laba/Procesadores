@@ -1,0 +1,8 @@
+Hola buenos dias
+
+¿Como estas?
+
+Esto es una prueba{
+
+} de como; - < &&
+puede funcionar la funcion readlines
