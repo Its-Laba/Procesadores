@@ -1,3 +1,5 @@
-"Hola buenos dias"
-
-"Hey"
+string "hola buenos dias";
+int a = 25;
+if (a > 10) {
+    return true
+    }
