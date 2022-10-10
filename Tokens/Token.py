@@ -1,7 +1,11 @@
 """ -------- Clase Token ----------"""
 
-class Token:
-    def __init__(self,codigo,atributo = ""):
+
+class T:
+
+    def __init__(self):
+        pass
+    def __init__(self,codigo, atributo = ""):
         self.codigo = codigo
         self.atributo = atributo
 
