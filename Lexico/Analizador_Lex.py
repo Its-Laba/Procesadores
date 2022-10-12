@@ -22,7 +22,7 @@ def main():
     ts = Tabla.Tabla_Simbolos.TS()
     ts.setTokens(AL.tokens)
     ts.process()
-    print(ts.getTabla())
+    ts.printTabla()
 
     print("FIN")
 
