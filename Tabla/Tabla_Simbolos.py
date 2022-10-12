@@ -93,30 +93,31 @@ class TS:
 
         f = open("../Test/Archivos/Tabla.txt", "a")
         f.write("TABLA PRINCIPAL #1:\n")
-        for num, fila in enumerate(self.tokens):
-            if  isinstance(fila,list) and fila[1] != "function":
+        for num, fila in enumerate(self.tabla):
+            if isinstance(fila,list) and fila[1] != "function":
                 f.write(f"* Lexema : \'{fila[0]}\'\n")
                 if not fun:
                     f.write("  ATRIBUTOS:\n")
                 f.write(f"    + tipo : {fila[1]}\n")
                 f.write(f"    + despl : {fila[2]}\n")
                 if not fun:
-                    f.write("  --------------------------------")
+                    f.write("  --------------------------------\n")
                 else:
                     f.write("\n")
             elif isinstance(fila,list) and fila[1] == "function":
                 f.write(f"* Lexema : \'{fila[0]}\'\n")
                 f.write("  ATRIBUTOS:\n")
                 f.write(f"    + tipo : \'{fila[1]}\'\n")
-                f.write(f"    + Nº Param: {(self).params.pop(0)}\n")
+                f.write(f"    + Num Param: {(self).params.pop(0)}\n")
                 f.write(f"    + tipoDevuelto : \'{fila[3]}\'\n")
-                f.write(f"    + Etiqueta: \'Et{fila[0]}#{self.indice}\'")
-                f.write("  --------------------------------")
+                f.write(f"    + Etiqueta: \'Et{fila[0]}#{self.indice}\'\n")
+                f.write("  --------------------------------\n")
             elif fila == "Inicio":
-                f.write(f"TABLA DE LA FUNCION {self.tokens[num-1][0]}\n")
+                f.write(f"TABLA DE LA FUNCION {self.tabla[num-1][0]} #{self.indice}:\n")
                 fun = True
+                self.indice += 1
             elif fila == "Final":
-                f.write("  --------------------------------")
+                f.write("  --------------------------------\n")
                 fun = False
 
 
