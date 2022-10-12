@@ -103,7 +103,7 @@ class TS:
         f.write("TABLA PRINCIPAL #1:\n")
         for num, fila in enumerate(self.tabla):
             if isinstance(fila, list) and fila[1] != "function":
-                f.write(f"* Lexema : \'{fila[0]}\'\n")
+                f.write(f"* LEXEMA : \'{fila[0]}\'\n")
                 if not fun:
                     f.write("  ATRIBUTOS:\n")
                 f.write(f"    + tipo : \'{fila[1]}\'\n")
@@ -113,7 +113,7 @@ class TS:
                 else:
                     f.write("\n")
             elif isinstance(fila, list) and fila[1] == "function":
-                f.write(f"* Lexema : \'{self.ids[fila[0]]}\'\n")
+                f.write(f"* LEXEMA : \'{self.ids[fila[0]]}\'\n")
                 f.write("  ATRIBUTOS:\n")
                 f.write(f"    + tipo : \'{fila[1]}\'\n")
                 param = (self).params.pop(0)
@@ -121,7 +121,7 @@ class TS:
                 if param == 0:
                     zero = True
                 f.write(f"    + tipoRetorno : \'{fila[3]}\'\n")
-                f.write(f"    + Etiqueta: \'Et{self.ids[fila[0]]}{self.indice}\'\n")
+                f.write(f"    + EtiqFuncion: \'Et{self.ids[fila[0]]}{self.indice}\'\n")
                 f.write("  --------------------------------\n")
             elif fila == "Inicio" and not zero:
                 f.write(f"TABLA DE LA FUNCION {self.ids[self.tabla[num-1][0]]} #{self.indice}:\n")
