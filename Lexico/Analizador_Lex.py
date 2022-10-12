@@ -9,6 +9,7 @@ class AL:
     palres = ["if", "else", "function", "input", "return", "let", "print", "int", "string", "boolean"]
     file = "../Test/prueba.txt"
     tokens = []
+    ids = []
 def get_palres():
     return AL.palres
 def main():
@@ -21,6 +22,7 @@ def main():
     procesar_lineas(lineas)
     ts = Tabla.Tabla_Simbolos.TS()
     ts.setTokens(AL.tokens)
+    ts.setIds(AL.ids)
     ts.process()
     ts.printTabla()
 
@@ -34,7 +36,10 @@ def procesar_lineas(lineas):
     while sigo:
         #print(f"{len(lineas)}: {AL.linea} | {len(lineas[AL.linea])}: {AL.puntero} ")
         # String
-        if lineas[AL.linea][AL.puntero] == '\"':
+        if len(lineas[AL.linea]) == AL.puntero:
+            AL.puntero = 0
+            AL.linea += 1
+        elif lineas[AL.linea][AL.puntero] == '\"':
             AL.puntero += 1
             cadena(lineas[AL.linea])
             token = Tokens.Token.T("CAD", '\"'+AL.cad+'\"')
@@ -47,7 +52,7 @@ def procesar_lineas(lineas):
                 token = Tokens.Token.T("PrAsig")
             else:
                 AL.puntero += 1
-                token = Tokens.TOken.T("Mult")
+                token = Tokens.Token.T("Mult")
 
         # Asignaccion
         elif lineas[AL.linea][AL.puntero] == '=':
@@ -113,7 +118,11 @@ def procesar_lineas(lineas):
             elif AL.cad in AL.palres:
                 token = Tokens.Token.T("Res", AL.cad)
             else:
-                token = Tokens.Token.T("ID", AL.cad)
+                if AL.cad in AL.ids:
+                    token = Tokens.Token.T("ID", AL.ids.index(AL.cad))
+                else:
+                    AL.ids.append(AL.cad)
+                    token = Tokens.Token.T("ID", AL.ids.index(AL.cad))
             AL.cad = ""
 
         # Salto de linea

@@ -9,14 +9,17 @@ class TS:
         self.indice = 2
         self.registros = 0
         self.desp = 0
+        self.fun_des = 0
         self.palRes = Lexico.Analizador_Lex.get_palres()
         self.tabla = []
         self.tokens = []
         self.params = []
+        self.ids = []
 
     def setTokens(self, tokens):
         self.tokens = tokens
-
+    def setIds(self, ids):
+        self.ids = ids
     def process(self):
        function  = False
        llav = False
@@ -44,7 +47,7 @@ class TS:
                     para = True
 
                 else:
-                    if llav:
+                    if para:
                         param += 1
                     self.addId(num,para)
 
@@ -56,22 +59,27 @@ class TS:
         lista = [self.tokens[num].getAtributo(), "function", -1 ,self.tokens[num+1].getAtributo()]
         self.tabla.append(lista)
         self.tabla.append("Inicio")
+        self.fun_des = 0
 
 
     def addId(self,num,fun = False):
         tipos = ["string", "int", "boolean"]
         lista = []
-        if self.tokens[num+1].getAtributo() in tipos:
-            if self.tokens[num+1].getAtributo() == "string":
+        if self.tokens[num+1].getAtributo() in tipos or self.tokens[num - 1].getAtributo() in tipos:
+            if self.tokens[num+1].getAtributo() == "string" or self.tokens[num - 1].getAtributo() == "string":
                 if not fun:
-                    lista = [self.tokens[num].getAtributo(), "string", 128 * 8]
+                    lista = [self.ids[self.tokens[num].getAtributo()], "string", self.desp ]
+                    self.desp += 128
                 else:
-                    lista = [self.tokens[num].getAtributo(), "string", 0]
+                    lista = [self.ids[self.tokens[num].getAtributo()], "string", self.fun_des]
+                    self.fun_des += 128
             else:
                 if not fun:
-                    lista = [self.tokens[num].getAtributo(), self.tokens[num+1].getAtributo(), 16]
+                    lista = [self.ids[self.tokens[num].getAtributo()], self.tokens[num + 1].getAtributo(), self.desp]
+                    self.desp += 2
                 else:
-                    lista = [self.tokens[num].getAtributo(), self.tokens[num + 1].getAtributo(), 0]
+                    lista = [self.ids[self.tokens[num].getAtributo()], self.tokens[num - 1].getAtributo(), self.fun_des]
+                    self.desp += 2
             self.tabla.append(lista)
     def addPal(self,token):
         """
@@ -88,36 +96,41 @@ class TS:
         self.tabla.append(lista)
 
     def printTabla(self):
-
+        print(self.tabla)
         fun = False
-
+        zero = False
         f = open("../Test/Archivos/Tabla.txt", "a")
         f.write("TABLA PRINCIPAL #1:\n")
         for num, fila in enumerate(self.tabla):
-            if isinstance(fila,list) and fila[1] != "function":
+            if isinstance(fila, list) and fila[1] != "function":
                 f.write(f"* Lexema : \'{fila[0]}\'\n")
                 if not fun:
                     f.write("  ATRIBUTOS:\n")
-                f.write(f"    + tipo : {fila[1]}\n")
+                f.write(f"    + tipo : \'{fila[1]}\'\n")
                 f.write(f"    + despl : {fila[2]}\n")
                 if not fun:
                     f.write("  --------------------------------\n")
                 else:
                     f.write("\n")
-            elif isinstance(fila,list) and fila[1] == "function":
-                f.write(f"* Lexema : \'{fila[0]}\'\n")
+            elif isinstance(fila, list) and fila[1] == "function":
+                f.write(f"* Lexema : \'{self.ids[fila[0]]}\'\n")
                 f.write("  ATRIBUTOS:\n")
                 f.write(f"    + tipo : \'{fila[1]}\'\n")
-                f.write(f"    + Num Param: {(self).params.pop(0)}\n")
-                f.write(f"    + tipoDevuelto : \'{fila[3]}\'\n")
-                f.write(f"    + Etiqueta: \'Et{fila[0]}#{self.indice}\'\n")
+                param = (self).params.pop(0)
+                f.write(f"    + NumParam: {param}\n")
+                if param == 0:
+                    zero = True
+                f.write(f"    + tipoRetorno : \'{fila[3]}\'\n")
+                f.write(f"    + Etiqueta: \'Et{self.ids[fila[0]]}{self.indice}\'\n")
                 f.write("  --------------------------------\n")
-            elif fila == "Inicio":
-                f.write(f"TABLA DE LA FUNCION {self.tabla[num-1][0]} #{self.indice}:\n")
+            elif fila == "Inicio" and not zero:
+                f.write(f"TABLA DE LA FUNCION {self.ids[self.tabla[num-1][0]]} #{self.indice}:\n")
                 fun = True
                 self.indice += 1
             elif fila == "Final":
-                f.write("  --------------------------------\n")
+                if not zero:
+                    f.write("  --------------------------------\n")
                 fun = False
+                zero = False
 
 
