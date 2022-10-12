@@ -1,7 +1,6 @@
 """ ----------- Clase Analizador Léxico -------------"""
 import Tokens.Token
-from Tokens import Token
-
+import Tabla.Tabla_Simbolos
 class AL:
     puntero = 0
     linea = 0
@@ -9,7 +8,9 @@ class AL:
     num = 0
     palres = ["if", "else", "function", "input", "return", "let", "print", "int", "string", "boolean"]
     file = "../Test/prueba.txt"
-
+    tokens = []
+def get_palres():
+    return AL.palres
 def main():
     """ Main funcion del programa """
     archivo = open(AL.file, "r")
@@ -18,6 +19,11 @@ def main():
     lineas = archivo.readlines()
     archivo.close()
     procesar_lineas(lineas)
+    ts = Tabla.Tabla_Simbolos.TS()
+    ts.setTokens(AL.tokens)
+    ts.process()
+    print(ts.getTabla())
+
     print("FIN")
 
     pass
@@ -121,6 +127,7 @@ def procesar_lineas(lineas):
         else:
             AL.puntero += 1
         if token != 0:
+            AL.tokens.append(token)
             escribir(token)
             token = 0
 

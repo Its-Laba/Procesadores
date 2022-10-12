@@ -1,5 +1,7 @@
-string "hola buenos dias";
-int a = 25;
-if (a > 10) {
-    return true
-    }
+let saludo string = "hola buenos dias";
+let a int = 25;
+function suma int (x int ){
+    let y int = 5;
+    return x + y;
+}
+
