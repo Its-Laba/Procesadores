@@ -36,6 +36,7 @@ def procesar_lineas(lineas):
     while sigo:
         #print(f"{len(lineas)}: {AL.linea} | {len(lineas[AL.linea])}: {AL.puntero} ")
         # String
+
         if len(lineas[AL.linea]) == AL.puntero:
             AL.puntero = 0
             AL.linea += 1
@@ -51,7 +52,6 @@ def procesar_lineas(lineas):
                 AL.puntero += 1
                 token = Tokens.Token.T("PrAsig")
             else:
-                AL.puntero += 1
                 token = Tokens.Token.T("Mult")
 
         # Asignaccion

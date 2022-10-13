@@ -1,39 +1,21 @@
 TABLA PRINCIPAL #1:
-* Lexema : 'n1'
+* LEXEMA : 'a'
   ATRIBUTOS:
     + tipo : 'int'
     + despl : 0
   --------------------------------
-* Lexema : 'n2'
+* LEXEMA : 'b'
   ATRIBUTOS:
     + tipo : 'int'
     + despl : 2
   --------------------------------
-* Lexema : 'l1'
+* LEXEMA : 'bbb'
   ATRIBUTOS:
     + tipo : 'boolean'
     + despl : 4
   --------------------------------
-* Lexema : 'l2'
+* LEXEMA : 'c'
   ATRIBUTOS:
     + tipo : 'boolean'
     + despl : 6
-  --------------------------------
-* Lexema : 'cad'
-  ATRIBUTOS:
-    + tipo : 'string'
-    + despl : 8
-  --------------------------------
-* Lexema : 'ff'
-  ATRIBUTOS:
-    + tipo : 'function'
-    + NumParam: 1
-    + tipoRetorno : 'boolean'
-    + Etiqueta: 'Etff2'
-  --------------------------------
-TABLA DE LA FUNCION ff #2:
-* Lexema : 'ss'
-    + tipo : 'boolean'
-    + despl : 0
-
   --------------------------------
