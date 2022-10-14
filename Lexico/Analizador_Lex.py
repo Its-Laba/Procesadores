@@ -36,8 +36,13 @@ def procesar_lineas(lineas):
     while sigo:
         #print(f"{len(lineas)}: {AL.linea} | {len(lineas[AL.linea])}: {AL.puntero} ")
         # String
-
-        if len(lineas[AL.linea]) == AL.puntero:
+        if AL.puntero == len(lineas[AL.linea]):
+            AL.puntero = 0
+            AL.linea += 1
+            if AL.linea == len(lineas):
+                sigo = False
+                token = Tokens.Token.T("EOF")
+        elif len(lineas[AL.linea]) == AL.puntero:
             AL.puntero = 0
             AL.linea += 1
         elif lineas[AL.linea][AL.puntero] == '\"':

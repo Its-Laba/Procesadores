@@ -1,14 +1,13 @@
-let a int;
-let   b  int  ;
-let bbb boolean ;
-a = 3;
-b=a					    		 	 	 	 	 	 	 	 	 	 	 	 	 	 	 													;
-	let
-		c
-			boolean
-					;
-c = a > b;
-if (c) bbb = bbb &&c;
-a = a * b;
-print a ;
-print b;
+let texto string;
+function alert (string msg_)
+{
+	print msg_;
+}
+function pideTexto ()
+{
+	print "Introduce un texto";
+	input texto;
+}
+pideTexto();
+  alert
+	(texto);

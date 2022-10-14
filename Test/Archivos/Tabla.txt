@@ -1,21 +1,26 @@
 TABLA PRINCIPAL #1:
-* LEXEMA : 'a'
+* LEXEMA : 'texto'
   ATRIBUTOS:
-    + tipo : 'int'
+    + tipo : 'string'
     + despl : 0
   --------------------------------
-* LEXEMA : 'b'
+* LEXEMA : 'alert'
   ATRIBUTOS:
-    + tipo : 'int'
-    + despl : 2
+    + tipo : 'function'
+    + NumParam: 1
+    + tipoRetorno : ''
+    + EtiqFuncion: 'Etalert2'
   --------------------------------
-* LEXEMA : 'bbb'
-  ATRIBUTOS:
-    + tipo : 'boolean'
-    + despl : 4
+TABLA DE LA FUNCION alert #2:
+* LEXEMA : 'msg_'
+    + tipo : 'string'
+    + despl : 0
+
   --------------------------------
-* LEXEMA : 'c'
+* LEXEMA : 'pideTexto'
   ATRIBUTOS:
-    + tipo : 'boolean'
-    + despl : 6
+    + tipo : 'function'
+    + NumParam: 0
+    + tipoRetorno : ''
+    + EtiqFuncion: 'EtpideTexto3'
   --------------------------------
