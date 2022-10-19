@@ -71,7 +71,7 @@ def procesar_lineas(lineas):
                 AL.puntero += 1
                 token = Tokens.Token.T("And")
             else:
-                print("Error linea: {lineas[linea]}, se esperaba &")
+                print(f"Error linea: {lineas[AL.linea]}, se esperaba &")
                 err()
         # Coma
         elif lineas[AL.linea][AL.puntero] == ',':
@@ -109,7 +109,7 @@ def procesar_lineas(lineas):
             if AL.num < 32768:
                 token = Tokens.Token.T("Entero", AL.num.__str__())
             else:
-                print(f"Error en linea: {lineas[AL.linea]} el numero {AL.num} sobrepasas el limite")
+                print(f"Error en linea: {lineas[AL.linea]} el numero {AL.num} sobrepasa el limite")
                 err()
             AL.num = 0
         elif letra(lineas[AL.linea][AL.puntero]):

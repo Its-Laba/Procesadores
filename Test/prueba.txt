@@ -1,13 +1,3 @@
-let texto string;
-function alert (string msg_)
-{
-	print msg_;
-}
-function pideTexto ()
-{
-	print "Introduce un texto";
-	input texto;
-}
-pideTexto();
-  alert
-	(texto);
+let cadena string;
+cadena = "Soy una cadena excesivamente larga por lo que el programa va a dar error y voy a poder ponerlo en el anexo de errores";
+print cadena;
